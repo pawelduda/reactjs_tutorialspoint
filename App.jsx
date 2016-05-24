@@ -5,18 +5,34 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      header: 'Header from state',
-      content: 'Content from state'
+      headerProp: 'Default header',
+      contentProp: 'Default content'
     }
   }
 
   render() {
     return (
       <div>
-        <h1>{this.state.header}</h1>
-        <h2>{this.state.content}</h2>
+        <Header headerProp={this.state.headerProp} />
+        <Content contentProp={this.state.contentProp} />
       </div>
     );
+  }
+}
+
+class Header extends React.Component {
+  render() {
+    return (
+      <h1>{this.props.headerProp}</h1>
+    )
+  }
+}
+
+class Content extends React.Component {
+  render() {
+    return (
+      <h2>{this.props.contentProp}</h2>
+    )
   }
 }
 
