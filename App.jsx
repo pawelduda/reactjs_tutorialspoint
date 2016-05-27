@@ -2,20 +2,28 @@ import React from 'react';
 let { PropTypes } = React;
 
 class App extends React.Component {
-  render() {
-    let { props } = this;
-    let { objectName1, objectName2, objectName3 } = props.propObject;
+  constructor() {
+    super();
 
+    this.state = {
+      data: []
+    }
+
+    this.setStateHandler = this.setStateHandler.bind(this);
+  }
+
+  setStateHandler() {
+    let item = 'setState...';
+    let myArray = this.state.data;
+    myArray.push(item);
+    this.setState({ data: myArray });
+  }
+
+  render() {
     return (
       <div>
-        <h3>Array: {props.propArray}</h3>
-        <h3>Bool: {props.propBool ? 'True' : 'False'}</h3>
-        <h3>Func: {props.propFunc(3)}</h3>
-        <h3>Number: {props.propNumber}</h3>
-        <h3>String: {props.propString}</h3>
-        <h3>Object: {objectName1}</h3>
-        <h3>Object: {objectName2}</h3>
-        <h3>Object: {objectName3}</h3>
+        <button onClick = {this.setStateHandler}>SET STATE</button>
+        <h4>State: {this.state.data}</h4>
       </div>
     );
   }
