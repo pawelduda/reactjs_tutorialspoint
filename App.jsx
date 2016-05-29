@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 
+import Home from './Home.jsx'
+import About from './About.jsx'
+import Contact from './Contact.jsx'
+
 class App extends React.Component {
   render() {
     return (
@@ -18,34 +22,4 @@ class App extends React.Component {
   }
 }
 
-class Home extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Home...</h1>
-      </div>
-    );
-  }
-}
-
-class About extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>About...</h1>
-      </div>
-    );
-  }
-}
-
-class Contact extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Contact...</h1>
-      </div>
-    );
-  }
-}
-
-export { App, Home, About, Contact }
+export default App;
