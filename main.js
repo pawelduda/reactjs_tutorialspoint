@@ -1,19 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import React from 'react'
 
-import App from './App.jsx'
-import Home from './Home.jsx'
-import About from './About.jsx'
-import Contact from './Contact.jsx'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
-ReactDOM.render((
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Home} />
-      <Route path="home" component={Home} />
-      <Route path="about" component={About} />
-      <Route path="contact" component={Contact} />
-    </Route>
-  </Router>
-), document.getElementById('app'))
+import App from './components/App.jsx'
+import todoApp from './reducers/reducers'
+
+let store = createStore(todoApp)
+
+let rootElement = document.getElementById('app')
+
+render(
+  <Provider store = {store}>
+    <App />
+  </Provider>,
+
+  rootElement
+)
