@@ -1,33 +1,48 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions/actions'
+import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import AddTodo from './AddTodo.jsx'
-import TodoList from './TodoList.jsx'
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-class App extends Component {
+    this.state = {
+      items: ['Item 1...', 'Item 2...', 'Item 3...', 'Item 4...']
+    }
+
+    this.handleAdd = this.handleAdd.bind(this);
+  };
+
+  handleAdd() {
+    var newItems = this.state.items.concat([prompt('Create New Item')]);
+    this.setState({items: newItems});
+  }
+
+  handleRemove(i) {
+    var newItems = this.state.items.slice();
+    newItems.splice(i, 1);
+    this.setState({items: newItems});
+  }
+
   render() {
-    const { dispatch, visibleTodos } = this.props
+    var items = this.state.items.map((item, i) => {
+      return (
+        <div key={item} onClick={this.handleRemove.bind(this, i)}>
+          {item}
+        </div>
+      );
+    });
 
     return (
       <div>
+        <button onClick = {this.handleAdd}>Add Item</button>
 
-        <AddTodo
-          onAddClick = {text =>
-            dispatch(addTodo(text))}
-          />
-
-        <TodoList todos = {visibleTodos}/>
-
+        <ReactCSSTransitionGroup transitionName="example"
+          transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+          {items}
+        </ReactCSSTransitionGroup>
       </div>
-    )
+    );
   }
 }
 
-function select(state) {
-  return {
-    visibleTodos: state.todos
-  }
-}
-
-export default connect(select)(App)
+export default App;
